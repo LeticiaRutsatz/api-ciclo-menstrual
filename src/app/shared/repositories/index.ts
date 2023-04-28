@@ -1,0 +1,1 @@
+export * from './userShared.repository';
