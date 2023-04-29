@@ -2,21 +2,18 @@ import { NextFunction, Request, Response } from 'express';
 import { z, ZodError } from 'zod';
 import { ResponseHelper } from '../../../../shared/adapter/http.helper';
 
-export const createUserValidator = (req: Request, res: Response, next: NextFunction) => {
+export const updateUserValidator = async (req: Request, res: Response, next: NextFunction) => {
+  const { email, password } = req.body;
   const response = new ResponseHelper();
 
-  const dateType = z.string().refine((date) => dateRegex.test(date), {
-    message: 'Invalid date, Enter a date in dd/mm/yyyy format ',
-  });
-
-  const dateRegex = /^(\d{2})\/(\d{2})\/(\d{4})$/;
+  if (req.body != password || email) {
+    return response.badRequest('invalid Camp!', res);
+  }
 
   const scheme = z
     .object({
-      name: z.string().nonempty(),
-      email: z.string().email(),
-      password: z.string().min(8),
-      birthDate: dateType,
+      email: z.string().email().optional(),
+      password: z.string().min(8).optional(),
     })
     .strip();
 

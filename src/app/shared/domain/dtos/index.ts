@@ -7,7 +7,9 @@ export interface userDTO {
 
 export interface userCreatedDTO extends userDTO {
   id: string;
-  // name: string;
-  // email: string;
-  // birthDate: string;
+}
+
+export interface userUpdatedDTO {
+  password?: string;
+  email?: string;
 }

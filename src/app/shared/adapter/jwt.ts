@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 interface Token {
   sign(token: string): string;
-  verify(token: string): string | jwt.JwtPayload;
+  verify(token: string): any;
 }
 
 const jwtKey = process.env.JWT_KEY as string;
@@ -13,7 +13,7 @@ export class JwtToken implements Token {
     return jwt.sign(token, jwtKey, { expiresIn: '1h' });
   }
 
-  verify(token: string): string | jwt.JwtPayload {
+  verify(token: string): any {
     return jwt.verify(token, jwtKey, { maxAge: '1h' });
   }
 }

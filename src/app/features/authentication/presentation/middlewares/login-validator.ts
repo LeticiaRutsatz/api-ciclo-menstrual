@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { z, ZodError } from 'zod';
-import { Flow } from '../../../../shared/domain/enums';
 
 export const loginUserValidator = (req: Request, res: Response, next: NextFunction) => {
   const scheme = z.object({

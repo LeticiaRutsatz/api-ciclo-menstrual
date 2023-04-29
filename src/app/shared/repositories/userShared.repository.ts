@@ -13,6 +13,13 @@ export class UserSharedRepository {
     return this.mapperToUserDetail(user, options);
   }
 
+  // async searchUserName(name: string) {
+  //   const user = await this._repository.findOneBy({ name });
+
+  //   if (!user) return false;
+  //   return true;
+  // }
+
   private mapperToUserDetail(entity: User, options?: boolean) {
     return {
       id: entity.id,

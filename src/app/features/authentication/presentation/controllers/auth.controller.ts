@@ -1,7 +1,6 @@
 import { Response, Request } from 'express';
 import { UserSharedRepository } from '../../../../shared/repositories';
 import { BCryptPassword } from '../../../../shared/adapter/crypto';
-import jwt from 'jsonwebtoken';
 import { JwtToken } from '../../../../shared/adapter/jwt';
 
 export class AuthController {

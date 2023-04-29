@@ -1,5 +1,5 @@
 import { AppDataSource } from '../../../../shared/db/data-source';
-import { userCreatedDTO, userDTO } from '../../../../shared/domain/dtos';
+import { userCreatedDTO, userDTO, userUpdatedDTO } from '../../../../shared/domain/dtos';
 import { User } from '../../../../shared/db/entities/user.entity';
 
 export class UserRepository {
@@ -21,5 +21,36 @@ export class UserRepository {
       email: entity.email,
       birthDate: entity.birthDate,
     };
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    const entities = this._repository.find();
+
+    return entities;
+  }
+
+  async getUserById(idUser: string): Promise<User | null> {
+    const entity = this._repository.findOneBy({ id: idUser });
+
+    if (!entity) {
+      return null;
+    }
+
+    return entity;
+  }
+
+  async updateUser(user: userUpdatedDTO, id: string): Promise<userUpdatedDTO | null> {
+    console.log(user);
+    await this._repository.update(id, {
+      email: user.email,
+      password: user.password,
+    });
+    const entity = this._repository.findOneBy({ id: id });
+    return entity;
+  }
+
+  async deleteUserbyId(id: string): Promise<any> {
+    const userDeleted = await this._repository.delete(id);
+    return userDeleted;
   }
 }
