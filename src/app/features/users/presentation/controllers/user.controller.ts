@@ -31,24 +31,24 @@ export class UserController {
   }
 
   async getUsers(req: Request, res: Response) {
-    const { id } = req.params;
+    const { userId } = req.params;
     const userRepository = new UserRepository();
     const response = new ResponseHelper();
 
-    if (req.user.email != process.env.ADMIN_EMAIL || req.user.id != process.env.ADMIN_ID) {
-      return response.badRequest('You do not have the necessary access!', res);
-    }
-
     try {
-      if (!id) {
+      if (!userId) {
+        if (req.user.email != process.env.ADMIN_EMAIL || req.user.id != process.env.ADMIN_ID) {
+          return response.badRequest('You do not have the necessary access!', res);
+        }
+
         const users = await userRepository.getAllUsers();
         return response.success('All users from the application!', res, users);
       }
 
-      const user = await userRepository.getUserById(id);
+      const user = await userRepository.getUserById(userId);
 
       if (!user) {
-        return response.badRequest('this ID do not exist!', res, id);
+        return response.badRequest('this ID do not exist!', res, userId);
       }
 
       return response.success('User search with success!', res, user);
@@ -58,18 +58,14 @@ export class UserController {
   }
 
   async updateUser(req: Request, res: Response) {
-    const { id } = req.params;
+    const { userId } = req.params;
     const { email, password } = req.body;
     const bcrypt = new BCryptPassword();
     const userRepository = new UserRepository();
     const response = new ResponseHelper();
 
-    // if (req.user.email != process.env.ADMIN_EMAIL || req.user.id != process.env.ADMIN_ID) {
-    //   return response.badRequest('You do not have the necessary access!', res);
-    // }
-
     try {
-      const user = await userRepository.getUserById(id);
+      const user = await userRepository.getUserById(userId);
 
       const userUpdate = await userRepository.updateUser(
         {
@@ -90,17 +86,17 @@ export class UserController {
   }
 
   async deleteUserbyId(req: Request, res: Response) {
-    const { id } = req.params;
+    const { userId } = req.params;
     const response = new ResponseHelper();
     const userRepository = new UserRepository();
 
-    // if (req.user.email != process.env.ADMIN_EMAIL || req.user.id != process.env.ADMIN_ID) {
-    //   return response.badRequest('You do not have the necessary access!', res);
-    // }
+    if (req.user.email != process.env.ADMIN_EMAIL || req.user.id != process.env.ADMIN_ID) {
+      return response.badRequest('You do not have the necessary access!', res);
+    }
 
     try {
-      const userDeleted = await userRepository.getUserById(id);
-      await userRepository.deleteUserbyId(id);
+      const userDeleted = await userRepository.getUserById(userId);
+      await userRepository.deleteUserbyId(userId);
       return response.success('User deleted!', res, userDeleted);
     } catch (err) {
       return response.error('Error deleting user!', res, err);

@@ -14,10 +14,10 @@ export default () => {
 
   router.get('/users', authValidator, new UserController().getUsers);
 
-  router.get('/users/:id', userExistsValidator, new UserController().getUsers);
+  router.get('/users/:userId', userExistsValidator, new UserController().getUsers);
 
   router.put(
-    '/users/:id',
+    '/users/:userId',
     authValidator,
     userExistsValidator,
     emailExistsValidator,
@@ -26,7 +26,7 @@ export default () => {
   );
 
   router.delete(
-    '/users/:id',
+    '/users/:userId',
     authValidator,
     userExistsValidator,
     new UserController().deleteUserbyId,

@@ -3,8 +3,6 @@ import { z, ZodError } from 'zod';
 import { ResponseHelper } from '../../../../shared/adapter/http.helper';
 
 export const createUserValidator = (req: Request, res: Response, next: NextFunction) => {
-  const response = new ResponseHelper();
-
   const dateType = z.string().refine((date) => dateRegex.test(date), {
     message: 'Invalid date, Enter a date in dd/mm/yyyy format ',
   });

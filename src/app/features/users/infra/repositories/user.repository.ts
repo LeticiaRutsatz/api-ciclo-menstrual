@@ -1,6 +1,6 @@
 import { AppDataSource } from '../../../../shared/db/data-source';
-import { userCreatedDTO, userDTO, userUpdatedDTO } from '../../../../shared/domain/dtos';
-import { User } from '../../../../shared/db/entities/user.entity';
+import { userCreatedDTO, userDTO, userUpdatedDTO } from '../../../../shared/domain/dtos/user';
+import { User } from '../../../../shared/db/entities';
 
 export class UserRepository {
   private _repository = AppDataSource.getRepository(User);

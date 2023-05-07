@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { Alarm, Cicle, Symptoms, User } from './entities';
+import { Alarm, Cicle, User } from './entities';
 import 'dotenv/config';
 import migrations from './migrations';
 
@@ -10,6 +10,6 @@ export const AppDataSource = new DataSource({
     rejectUnauthorized: false,
   },
   logging: true,
-  entities: [User, Cicle, Alarm, Symptoms],
+  entities: [User, Cicle, Alarm],
   migrations,
 });

@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Flow } from '../../domain/enums';
+import { Entity, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Flow, Symptoms } from '../../domain/enums';
 import { BaseEntity } from './base.entity';
 import { User } from './user.entity';
 
@@ -22,6 +22,9 @@ export class Cicle extends BaseEntity {
 
   @Column({ type: 'enum', enum: Flow })
   flow!: Flow;
+
+  @Column({ nullable: true })
+  symptoms!: string; // Altere o tipo para SymptomsArray
 
   @Column({ name: 'user_id' })
   userId!: string;

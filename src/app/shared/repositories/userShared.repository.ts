@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../db/data-source';
 import { User } from '../db/entities';
-import { userDTO } from '../domain/dtos';
+import { userDTO } from '../domain/dtos/user';
 
 export class UserSharedRepository {
   private _repository = AppDataSource.getRepository(User);
@@ -12,13 +12,6 @@ export class UserSharedRepository {
     if (!user) return undefined;
     return this.mapperToUserDetail(user, options);
   }
-
-  // async searchUserName(name: string) {
-  //   const user = await this._repository.findOneBy({ name });
-
-  //   if (!user) return false;
-  //   return true;
-  // }
 
   private mapperToUserDetail(entity: User, options?: boolean) {
     return {

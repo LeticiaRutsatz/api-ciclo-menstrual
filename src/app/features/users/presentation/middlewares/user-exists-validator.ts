@@ -4,19 +4,19 @@ import { UserRepository } from '../../infra/repositories/user.repository';
 import { validate } from 'uuid';
 
 export const userExistsValidator = async (req: Request, res: Response, next: NextFunction) => {
-  const { id } = req.params;
+  const { userId } = req.params;
   const response = new ResponseHelper();
   const userRepository = new UserRepository();
 
-  if (!id) {
+  if (!userId) {
     return response.badRequest('Please send a ID!', res);
   }
 
-  if (!validate(id)) {
+  if (!validate(userId)) {
     return response.badRequest('this ID do not exist!', res);
   }
 
-  const exists = await userRepository.getUserById(id);
+  const exists = await userRepository.getUserById(userId);
 
   if (!exists) {
     return response.badRequest('This user do not exist!', res);
