@@ -1,1 +1,1 @@
-export * from './cicle.usecases';
+export * from './cicle.usecase';
