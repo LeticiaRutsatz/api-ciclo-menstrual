@@ -34,8 +34,8 @@ export class CicleUseCase {
       userId,
     };
 
-    const cicle = await cicleRepository.saveNewCicle(requestCicle);
+    const newCicle = await cicleRepository.saveNewCicle(requestCicle);
     console.log('cicle repository', requestCicle);
-    return cicle;
+    return newCicle;
   }
 }
