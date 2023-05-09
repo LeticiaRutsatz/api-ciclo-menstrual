@@ -1,5 +1,0 @@
-env:
-  - key: ENTRYPOINT
-    value: npm start
-  - key: WORKDIR
-    value: /opt/render/project/src
