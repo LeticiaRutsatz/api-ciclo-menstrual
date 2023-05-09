@@ -1,4 +1,4 @@
-import { Entity, Column, OneToMany, JoinColumn, ManyToMany } from 'typeorm';
+import { Entity, Column, OneToMany, JoinColumn, ManyToMany, OneToOne } from 'typeorm';
 import { Alarm } from './alarm.entity';
 import { BaseEntity } from './base.entity';
 import { Cicle } from './cicle.entity';
@@ -20,6 +20,6 @@ export class User extends BaseEntity {
   @OneToMany(() => Cicle, (cicle) => cicle.user)
   cicles!: Cicle[];
 
-  @OneToMany(() => Alarm, (alarm) => alarm.user)
-  alarm!: Alarm[];
+  @OneToOne(() => Alarm, (alarm) => alarm.user)
+  alarm!: Alarm;
 }

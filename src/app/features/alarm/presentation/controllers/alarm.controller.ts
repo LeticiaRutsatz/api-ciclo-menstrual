@@ -28,12 +28,12 @@ export class AlarmController {
 
     try {
       if (!id && !userId) {
+        if (req.user.email != process.env.ADMIN_EMAIL || req.user.id != process.env.ADMIN_ID) {
+          return response.badRequest('You do not have the necessary access!', res);
+        }
+
         const alarms = await alarmRepository.getAllAlarms();
         return response.success('All alarms from the application!', res, alarms);
-      }
-
-      if (req.user.email != process.env.ADMIN_EMAIL || req.user.id != process.env.ADMIN_ID) {
-        return response.badRequest('You do not have the necessary access!', res);
       }
 
       const alarm = await alarmRepository.getAlarmById(id);

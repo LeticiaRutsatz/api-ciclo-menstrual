@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne } from 'typeorm';
 import { User } from './user.entity';
 import { BaseEntity } from './base.entity';
 
@@ -10,7 +10,7 @@ export class Alarm extends BaseEntity {
   @Column({ name: 'alarm_time' })
   alarmTime!: string;
 
-  @ManyToOne(() => User, (user) => user.alarm)
+  @OneToOne(() => User, (user) => user.alarm)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user!: User;
 }

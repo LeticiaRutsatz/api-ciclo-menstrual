@@ -6,10 +6,6 @@ export const updateUserValidator = async (req: Request, res: Response, next: Nex
   const { email, password } = req.body;
   const response = new ResponseHelper();
 
-  if (req.body != password || email) {
-    return response.badRequest('invalid Camp!', res);
-  }
-
   const scheme = z
     .object({
       email: z.string().email().optional(),
