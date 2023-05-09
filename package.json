@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./dist/server.ts",
-    "build": "npx tsc --watch",
+    "build": "npx tsc",
     "dev": "ts-node-dev --transpile-only ./src/server.ts",
     "migration:create": "typeorm migration:create src/app/shared/db/migrations/DropColumnToAlarm",
     "migration:run": "typeorm-ts-node-commonjs migration:run -d src/app/shared/db/data-source.ts",
