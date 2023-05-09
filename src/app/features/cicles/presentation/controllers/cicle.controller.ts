@@ -10,13 +10,17 @@ export class CicleController {
     const response = new ResponseHelper();
     const useCase = new CicleUseCase();
 
-    console.log('symptomns', symptoms);
+    try {
+      console.log('symptomns', symptoms);
 
-    const cicle = await useCase.execute({ startDate, endDate, flow, userId, symptoms });
+      const cicle = await useCase.execute({ startDate, endDate, flow, userId, symptoms });
 
-    console.log('cicle', cicle);
+      console.log('cicle', cicle);
 
-    return response.success('Cicle created successfully!', res, cicle);
+      return response.success('Cicle created successfully!', res, cicle);
+    } catch (err) {
+      return response.error('Error creating Alarm!', res, err);
+    }
   }
 
   async getCicles(req: Request, res: Response) {
